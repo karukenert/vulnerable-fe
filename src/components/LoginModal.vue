@@ -13,7 +13,7 @@
             label="Username"
             v-model="model.username"
             required
-            :rules="[required]"
+            :rules="[requiredMessage('Username')]"
             append-icon="mdi-account"
           />
           <v-text-field
@@ -21,7 +21,7 @@
             v-model="model.password"
             required
             type="password"
-            :rules="[requiredPassword]"
+            :rules="[requiredMessage('Password')]"
             append-icon="mdi-lock"
           />
         </v-form>
@@ -43,6 +43,9 @@
 import {useAppStore} from "@/store/app";
 import {ref} from "vue";
 import {VForm} from "vuetify/components/VForm";
+import useRequired from '@/util/useRequired'
+
+const { requiredMessage } = useRequired()
 
 const store = useAppStore()
 

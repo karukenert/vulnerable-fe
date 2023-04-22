@@ -7,13 +7,13 @@
           v-model="model.domain"
           required
           append-icon="mdi-earth"
-          :rules="[requiredMessage('web')]"
+          :rules="[requiredMessage('Website')]"
         />
         <v-text-field
           v-model="model.email"
           label="E-mail"
           required
-          :rules="[requiredMessage('email')]"
+          :rules="[requiredMessage('Email')]"
           append-icon="mdi-email"
         />
 
@@ -29,7 +29,7 @@
 
 
         <div class="d-flex align-self-center justify-self-center">
-          <v-checkbox v-model="model.recordAdded" required :rules="[requiredMessage('generic')]"
+          <v-checkbox v-model="model.recordAdded" required :rules="[requiredMessage('This field')]"
                       label="I Have added the TXT record on the domain"/>
         </div>
       </v-form>
@@ -48,13 +48,18 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {VForm} from "vuetify/components/VForm";
+import useRequired from '@/util/useRequired'
+
+const { requiredMessage } = useRequired()
+
+
 
 const checkBoxes = [
   {label: "Git", value: "GIT"},
   {label: "Email", value: "EMAIL"},
   {label: "DNS", value: "DNS"},
-  {label: "2FA", value: "2FA", disabled: true},
-  {label: "Cloud", value: "CLOUD", disabled: true},
+  {label: "2FA", value: "2FA" },
+  {label: "Cloud", value: "CLOUD" },
   {label: "Certificates", value: "CERTIFICATES",},
 ]
 
@@ -65,20 +70,6 @@ const model = ref({
   recordAdded: false
 })
 
-
-const msg = {
-  web: 'Webpage is mandatory',
-  generic: 'This field is mandatory',
-  email: 'Email is mandatory',
-}
-const requiredMessage = (type: keyof typeof msg) => {
-  const message = msg[type]
-
-  return (value: string) => {
-    if (value) return true;
-    return message
-  }
-}
 
 
 const hash = btoa("asdaaa11asdsdsadsadas123131jjo_")
