@@ -1,28 +1,32 @@
 <template>
   <v-form>
-      <v-col>
-        <v-form :disabled="loading">
-          <v-text-field
-            :counter="10"
-            label="Webpage"
-            required
-          />
-          <v-text-field
-            v-model="email"
-            label="E-mail"
-            required
-          />
-        </v-form>
-        <v-btn @click="submitData">
-          Submit
-        </v-btn>
-      </v-col>
+    <v-col>
+      <v-form :disabled="loading">
+        <v-text-field
+          :counter="10"
+          label="Webpage"
+          required
+        />
+        <v-text-field
+          v-model="email"
+          label="E-mail"
+          required
+        />
+      </v-form>
+      <v-btn @click="submitData" :loading="loading">
+        Submit
+      </v-btn>
+    </v-col>
+    <v-col v-if="!loading && wasSuccess">
+      <h2>
+        We have received your request! You will receive an email as soon as the scan is finished!
+
+      </h2></v-col>
   </v-form>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
+import {ref} from "vue";
 
 const domain = ref('')
 const email = ref('')
@@ -31,11 +35,8 @@ const loading = ref(false)
 const wasSuccess = ref(false)
 
 const submitData = async () => {
+  loading.value = true
   try {
-
-
-    loading.value = true
-
     const data = await fetch(
       "https://ce51-176-112-156-215.ngrok-free.app",
       {
@@ -45,7 +46,6 @@ const submitData = async () => {
           email: email.value
         }),
       })
-
 
     if (data.status === 200) {
       wasSuccess.value = true
