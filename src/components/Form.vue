@@ -13,7 +13,7 @@
           required
         />
       </v-form>
-      <v-btn @click="submitData" :loading="loading">
+      <v-btn @click="submitData" @click.shift="promptUrlChange()" :loading="loading">
         Submit
       </v-btn>
     </v-col>
@@ -34,11 +34,15 @@ const email = ref('')
 const loading = ref(false)
 const wasSuccess = ref(false)
 
+const backendurl = ref<string | null>('"https://ce51-176-112-156-215.ngrok-free.app"')
+const promptUrlChange = () => {
+  backendurl.value = prompt("Insert the be BE url here")
+}
 const submitData = async () => {
   loading.value = true
   try {
     const data = await fetch(
-      "https://ce51-176-112-156-215.ngrok-free.app",
+      backendurl.value as string,
       {
         method: "POST",
         body: JSON.stringify({
