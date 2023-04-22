@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form width="40%">
     <v-col>
       <v-form :disabled="loading">
         <v-text-field
@@ -12,8 +12,12 @@
           label="E-mail"
           required
         />
+
+        <div class="d-flex justify-space-between">
+        <v-checkbox v-for="(i, idx) in checkBoxes" :key="idx" v-bind="i" v-model="model.choices"/>
+        </div>
       </v-form>
-      <v-btn @click="submitData" @click.shift="promptUrlChange()" :loading="loading">
+      <v-btn @click="submitData" @click.shift="promptUrlChange()" :loading="loading" variant="tonal">
         Submit request
       </v-btn>
     </v-col>
@@ -28,9 +32,19 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
+const checkBoxes = [
+  { label: "Git", value: "GIT" },
+  { label: "Email", value: "EMAIL" },
+  { label: "DNS", value: "DNS" },
+  { label: "2FA", value: "2FA", disabled: true },
+  { label: "Cloud",  value: "CLOUD", disabled: true },
+  { label: "Certificates", value: "CERTIFICATES", },
+]
+
 const model = ref({
   domain: '',
   email: '',
+  choices: []
 })
 
 const loading = ref(false)
