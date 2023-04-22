@@ -1,7 +1,8 @@
 <template>
   <v-dialog
     v-model="store.loginDialog"
-    width="40%"
+    width="60%"
+    height="60%"
     :close-on-back="false"
     persistent
   >
@@ -27,7 +28,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer/>
-        <v-btn size="large" variant="tonal" class="mr-2" @click="login">
+        <v-btn size="large" variant="tonal">
+          Create an account
+        </v-btn>
+        <v-btn size="large" variant="tonal" @click="login">
           Log in
         </v-btn>
       </v-card-actions>
@@ -59,6 +63,6 @@ const requiredPassword = (value: string) => {
 
 const login = async () => {
   const data = await form.value?.validate()
-  if(data?.valid) store.login()
+  if (data?.valid) store.login()
 }
 </script>
