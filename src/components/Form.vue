@@ -3,33 +3,35 @@
     <v-col>
       <v-form :disabled="loading">
         <v-text-field
-          :counter="10"
           label="Webpage"
+          v-model="model.domain"
           required
         />
         <v-text-field
-          v-model="email"
+          v-model="model.email"
           label="E-mail"
           required
         />
       </v-form>
       <v-btn @click="submitData" @click.shift="promptUrlChange()" :loading="loading">
-        Submit
+        Submit request
       </v-btn>
     </v-col>
     <v-col v-if="!loading && wasSuccess">
       <h2>
         We have received your request! You will receive an email as soon as the scan is finished!
-
-      </h2></v-col>
+      </h2>
+    </v-col>
   </v-form>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
 
-const domain = ref('')
-const email = ref('')
+const model = ref({
+  domain: '',
+  email: '',
+})
 
 const loading = ref(false)
 const wasSuccess = ref(false)
@@ -45,10 +47,7 @@ const submitData = async () => {
       backendurl.value as string,
       {
         method: "POST",
-        body: JSON.stringify({
-          domain: domain.value,
-          email: email.value
-        }),
+        body: JSON.stringify({...model.value}),
       })
 
     if (data.status === 200) {
