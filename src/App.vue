@@ -4,7 +4,7 @@
     <v-main v-else>
       <v-app-bar elevation="2">
         <template #prepend>
-          <v-icon>mdi-lock</v-icon>
+          <Logo/>
         </template>
       </v-app-bar>
       <router-view  />
@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import LoginModal from '@/components/LoginModal.vue'
+import Logo from '@/components/Logo.vue'
 import {useAppStore} from "@/store/app";
 import {storeToRefs} from "pinia";
 

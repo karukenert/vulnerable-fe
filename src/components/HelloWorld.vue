@@ -2,7 +2,8 @@
   <v-container class="fill-height">
     <v-responsive class="d-flex align-center text-center fill-height">
       <div class="mb-10">
-        <h1>Welcome to site checker</h1>
+        <h1>Welcome to SafeWebGuard</h1>
+        <p>Enter your details to get a comprehensive cyber security overview</p>
       </div>
       <Form/>
     </v-responsive>
