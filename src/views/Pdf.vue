@@ -8,7 +8,12 @@
       <p><strong>Explanation:</strong> {{ item.explanation }}</p>
       <p><strong>Solution:</strong> {{ item.solution }}</p>
     </article>
+
+  <br>
+  <h3> Need help? We're here for you! </h3><br>
+  <v-btn>Contact us</v-btn>
   </v-container>
+
 </template>
 
 
