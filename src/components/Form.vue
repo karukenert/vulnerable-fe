@@ -37,11 +37,6 @@
         Submit request
       </v-btn>
     </v-col>
-    <v-col v-if="!loading && wasSuccess">
-      <h2>
-        We have received your request! You will receive an email as soon as the scan is finished!
-      </h2>
-    </v-col>
   </v-form>
 </template>
 
@@ -78,7 +73,6 @@ const hash = btoa("asdaaa11asdsdsadsadas123131jjo_")
 const form = ref<VForm | null>(null)
 
 const loading = ref(false)
-const wasSuccess = ref(false)
 
 const backendurl = ref<string | null>('"https://ce51-176-112-156-215.ngrok-free.app"')
 const promptUrlChange = () => {
@@ -91,21 +85,17 @@ const submitData = async () => {
 
   if (data?.valid) {
     try {
-      const data = await fetch(
+       await fetch(
         backendurl.value as string,
         {
           method: "POST",
           body: JSON.stringify({...model.value}),
         })
 
-      if (data.status === 200) {
-        wasSuccess.value = true
-      }
     } catch (_) { /* empty */
     } finally {
       setTimeout(() => {
         loading.value = false
-        wasSuccess.value = true
         router.push('/report')
       }, 4000)
     }
