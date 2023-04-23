@@ -47,14 +47,17 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 import {VForm} from "vuetify/components/VForm";
 import useRequired from '@/util/useRequired'
 
 const { requiredMessage } = useRequired()
+const router = useRouter()
 
 
 
 const checkBoxes = [
+  {label: "Web", value: "WEB",},
   {label: "Git", value: "GIT"},
   {label: "Email", value: "EMAIL"},
   {label: "DNS", value: "DNS"},
@@ -69,8 +72,6 @@ const model = ref({
   choices: [],
   recordAdded: false
 })
-
-
 
 const hash = btoa("asdaaa11asdsdsadsadas123131jjo_")
 
@@ -105,6 +106,7 @@ const submitData = async () => {
       setTimeout(() => {
         loading.value = false
         wasSuccess.value = true
+        router.push('/report')
       }, 4000)
     }
   } else {
