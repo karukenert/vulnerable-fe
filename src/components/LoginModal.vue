@@ -13,7 +13,7 @@
             label="Username"
             v-model="model.username"
             required
-            :rules="[requiredMessage('Username'), isEmail]"
+            :rules="[requiredMessage('Username')]"
             append-icon="mdi-account"
           />
           <v-text-field
@@ -56,11 +56,6 @@ const model = ref({
   username: '',
   password: ''
 })
-const isEmail = (e: string) => {
-  const result = e && e.includes('@') && e.includes('.')
-  if (result) return true;
-  return "Email is not correct"
-}
 
 const login = async () => {
   loading.value = true;

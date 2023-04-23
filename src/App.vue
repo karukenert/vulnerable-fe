@@ -1,18 +1,21 @@
 <template>
   <v-app>
-    <v-main>
-      <LoginModal/>
-      <HelloWorld v-if="isLoggedIn"/>
+    <LoginModal v-if="!isLoggedIn"/>
+    <v-main v-else>
+      <v-app-bar elevation="2">
+        <template #prepend>
+          <v-icon>mdi-lock</v-icon>
+        </template>
+      </v-app-bar>
+      <router-view  />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
 import LoginModal from '@/components/LoginModal.vue'
 import {useAppStore} from "@/store/app";
 import {storeToRefs} from "pinia";
 
 const { isLoggedIn } = storeToRefs(useAppStore())
-
 </script>

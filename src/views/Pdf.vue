@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 
-const companyName = "MegaCorpOne" // TODO
+const companyName = "Example corporation"
 
 const color = {
   medium: "red",
