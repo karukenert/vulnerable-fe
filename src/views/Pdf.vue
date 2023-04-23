@@ -4,7 +4,7 @@
   >
     <h1>Infrastructure report for {{ companyName }}</h1>
     <article v-for="(item,idx) in problems" :key="idx" class="py-6" :id="item.title">
-      <h2>{{ item.title }} (<span :class="color[item.risk]">{{ item.risk.toUpperCase() }}</span>)</h2>
+      <h2>{{ item.title }} (<span :class="color[item.risk as string]">{{ item.risk.toUpperCase() }}</span>)</h2>
       <p><strong>Explanation:</strong> {{ item.explanation }}</p>
       <p><strong>Solution:</strong> {{ item.solution }}</p>
     </article>
@@ -16,7 +16,7 @@
 
 const companyName = "Example corporation"
 
-const color = {
+const color: Record<string, string> = {
   medium: "red",
   low: "yellow"
 }
